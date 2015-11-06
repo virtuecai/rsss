@@ -5,24 +5,23 @@
 
 <html>
 <head>
-	<title>用户管理</title>
+	<title>新增用户</title>
 </head>
 
 <body>
-	<form id="inputForm" action="${ctx}/admin/user/update" method="post" class="form-horizontal">
-		<input type="hidden" name="id" value="${user.id}"/>
+	<form id="inputForm" action="${ctx}/admin/user/add" method="post" class="form-horizontal">
 		<fieldset>
-			<legend><small>用户管理</small></legend>
+			<legend><small>新增用户</small></legend>
 			<div class="control-group">
 				<label class="control-label">用户名:</label>
 				<div class="controls">
-					<input type="text" id="name" name="loginName" value="${user.loginName}" class="input-large required"/>
+					<input type="text" id="loginName" name="loginName" class="input-large required" placeholder="请输入用户名" minlength="4" maxlength="20"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="plainPassword" class="control-label">密码:</label>
 				<div class="controls">
-					<input type="password" id="plainPassword" name="plainPassword" class="input-large" placeholder="请输入密码"/>
+					<input type="password" id="plainPassword" name="plainPassword" class="input-large" placeholder="请输入密码" minlength="4" maxlength="20"/>
 				</div>
 			</div>
 			<div class="control-group">
@@ -35,9 +34,9 @@
 				<label for="location.id" class="control-label">所属:</label>
 				<div class="controls">
 					<select id="location.id" name="location.id">
-						<c:forEach items="${locationList}" var="item">
-							<option value="${item.id}" ${user.location.id == item.id ? "selected" : ""}>${item.name}</option>
-						</c:forEach>
+					<c:forEach items="${locationList}" var="item">
+						<option value="${item.id}">${item.name}</option>
+					</c:forEach>
 					</select>
 				</div>
 			</div>
@@ -52,12 +51,17 @@
 					</label>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">注册日期:</label>
+			<%--<div class="control-group">
+				<label class="control-label">禁用:</label>
 				<div class="controls">
-					<span class="help-inline" style="padding:5px 0px"><fmt:formatDate value="${user.registerDate}" pattern="yyyy/MM/dd" /></span>
+					<label class="checkbox inline">
+						<input type="checkbox" name="roles" value="admin"> 是
+					</label>
+					<label class="checkbox inline">
+						<input type="checkbox" name="roles" value="user"> 否
+					</label>
 				</div>
-			</div>
+			</div>--%>
 			<div class="form-actions">
 				<input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;	
 				<input id="cancel_btn" class="btn" type="button" value="返回" onclick="history.back()"/>
@@ -68,7 +72,7 @@
 	<script>
 		$(document).ready(function() {
 			//聚焦第一个输入框
-			$("#name").focus();
+			$("#loginName").focus();
 			//为inputForm注册validate函数
 			$("#inputForm").validate();
 		});

@@ -107,7 +107,6 @@ public class User extends IdEntity {
         this.loginName = loginName;
     }
 
-    @NotBlank
     public String getName() {
         return name;
     }

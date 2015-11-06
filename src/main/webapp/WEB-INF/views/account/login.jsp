@@ -83,7 +83,7 @@
 
 	<shiro:user>
 	<form class="form-signin text-center" style="margin-top: 40px;">
-		<a class="btn btn-large btn-success" href="${ctx}/task" style="margin-top: 10px;">已登录, 点击进入系统</a>
+		<a class="btn btn-large btn-success" href="${ctx}/welcome" style="margin-top: 10px;">已登录, 点击进入系统</a>
 	</form>
 	</shiro:user>
 	<%@ include file="/WEB-INF/layouts/footer.jsp"%>

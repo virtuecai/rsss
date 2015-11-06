@@ -7,6 +7,7 @@ package com.xyxy.platform.web.account;
 
 import javax.validation.Valid;
 
+import com.xyxy.platform.service.account.ShiroDbRealm;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,8 @@ public class ProfileController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String update(@Valid @ModelAttribute("user") User user) {
-		accountService.updateUser(user);
+		ShiroDbRealm.ShiroUser shiroUser = (ShiroDbRealm.ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		accountService.updateUser(user, shiroUser.id);
 		updateCurrentUserName(user.getName());
 		return "redirect:/";
 	}

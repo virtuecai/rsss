@@ -7,6 +7,8 @@ package com.xyxy.platform.service.account;
 
 import java.util.List;
 
+import com.xyxy.platform.entity.Location;
+import com.xyxy.platform.service.LocationService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -41,6 +43,8 @@ public class AccountService {
 
 	private UserDao userDao;
 	private TaskDao taskDao;
+	@Autowired
+	private LocationService locationService;
 	private Clock clock = Clock.DEFAULT;
 
 	public List<User> getAllUser() {
@@ -66,6 +70,36 @@ public class AccountService {
 		userDao.save(user);
 	}
 
+	public void createUser(User user, Long currentUserId) {
+		User currentUser = getUser(currentUserId);
+		user.setCreateUser(currentUser);
+		user.setRegisterDate(clock.getCurrentDate());
+		user.setLocation(user.getLocation());
+		if (StringUtils.isNotBlank(user.getPlainPassword())) {
+			entryptPassword(user);
+		}
+		user.setName(user.getLoginName());
+		user.setUpdateDate(clock.getCurrentDate());
+		user.setUpdateUser(currentUser);
+		user.setStatus(User.Status.OFFLINE);
+		userDao.save(user);
+	}
+
+	public void updateUser(User user, Long currentUserId) {
+		User currentUser = getUser(currentUserId);
+		user.setRegisterDate(clock.getCurrentDate());
+		user.setLocation(user.getLocation());
+		if (StringUtils.isNotBlank(user.getPlainPassword())) {
+			entryptPassword(user);
+		}
+		if(StringUtils.isNotBlank(user.getLoginName())) {
+			user.setName(user.getLoginName());
+		}
+		user.setUpdateDate(clock.getCurrentDate());
+		user.setUpdateUser(currentUser);
+		userDao.save(user);
+	}
+
 	public void updateUser(User user) {
 		if (StringUtils.isNotBlank(user.getPlainPassword())) {
 			entryptPassword(user);
@@ -73,6 +107,16 @@ public class AccountService {
 		if(StringUtils.isNotBlank(user.getLoginName())) {
 			user.setName(user.getLoginName());
 		}
+
+		//User currentUser = getUser(currentUserId);
+		if(null != user && null != user.getId()) {
+			//user.setCreateUser(currentUser);
+			user.setRegisterDate(clock.getCurrentDate());
+		} else {
+			user.setStatus(User.Status.OFFLINE);
+		}
+		user.setUpdateDate(clock.getCurrentDate());
+		//user.setUpdateUser(currentUser);
 		userDao.save(user);
 	}
 
