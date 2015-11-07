@@ -14,7 +14,8 @@
 			<a class="brand" href="#"><fmt:message key="project.name"/></a>
 			<div class="nav-collapse collapse">
 				<p class="navbar-text pull-right">
-				<a href="${ctx}/logout" class="navbar-link">Logout</a>
+					<i class="icon-user"></i> <shiro:principal property="name"/>  |
+					<a href="${ctx}/logout" class="navbar-link"><fmt:message key="logout"/></a>
 				</p>
 				<%--<ul class="nav">--%>
 				<%--<li class="active"><a href="#">Home</a></li>--%>

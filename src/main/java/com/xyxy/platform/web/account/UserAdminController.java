@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import com.xyxy.platform.service.LocationService;
 import com.xyxy.platform.service.account.ShiroDbRealm;
+import com.xyxy.platform.web.taglib.Functions;
+import com.xyxy.platform.web.utils.I18nMessageUtil;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -81,17 +83,22 @@ public class UserAdminController {
 	public String update(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		ShiroDbRealm.ShiroUser shiroUser = (ShiroDbRealm.ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		accountService.updateUser(user, shiroUser.id);
-		ApplicationContext ctx = RequestContextUtils.getWebApplicationContext(request);
-		String msg = ctx.getMessage("user.update.success", new Object[]{user.getLoginName()}, RequestContextUtils.getLocale(request));
+		String msg = I18nMessageUtil.get(request, "user.update.success", user.getLoginName());
 		redirectAttributes.addFlashAttribute("message", msg);
 		return "redirect:/admin/user";
 	}
 
 	@RequestMapping(value = "delete/{id}")
-	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+		String msg;
 		User user = accountService.getUser(id);
-		accountService.deleteUser(id);
-		redirectAttributes.addFlashAttribute("message", "删除用户" + user.getLoginName() + "成功");
+		if(User.Status.ONLINE.getOrdinal() == Functions.status(user)) {
+			msg = I18nMessageUtil.get(request, "user.online.cannot.delete", user.getLoginName());
+		} else {
+			accountService.deleteUser(id);
+			msg = I18nMessageUtil.get(request, "user.delete.success", user.getLoginName());
+		}
+		redirectAttributes.addFlashAttribute("message", msg);
 		return "redirect:/admin/user";
 	}
 

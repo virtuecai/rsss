@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="zhangfn" uri="http://github.com/zhangkaitao/tags/zhang-functions" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 <html>
@@ -28,14 +29,14 @@
 <table id="contentTable" class="table table-striped table-bordered table-condensed">
     <thead>
     <tr>
-        <th>用户编号</th>
-        <th>用户名</th>
-        <th>所属</th>
-        <th>注册时间</th>
-        <th>更新时间</th>
-        <th>更新管理者</th>
-        <%--<th>状态</th>--%>
-        <th style="width: 88px;">管理</th>
+        <th><fmt:message key="user.id"/></th>
+        <th><fmt:message key="user.loginName"/></th>
+        <th><fmt:message key="user.location"/></th>
+        <th><fmt:message key="user.registerDate"/></th>
+        <th><fmt:message key="user.updateDate"/></th>
+        <th><fmt:message key="user.updateAdmin"/></th>
+        <th><fmt:message key="user.status"/></th>
+        <th style="width: 88px;"><fmt:message key="user.list.table.thead.opreation"/></th>
     </tr>
     </thead>
     <tbody>
@@ -51,10 +52,20 @@
                 <fmt:formatDate value="${user.updateDate}" pattern="yyyy/MM/dd"/>
             </td>
             <td>${user.updateUser.loginName}</td>
-            <%--<td>${user.updateUser.status.text}</td>--%>
             <td>
-                <a class="btn btn-mini" href="${ctx}/admin/user/update/${user.id}">修改</a>
-                <a class="btn btn-mini" href="${ctx}/admin/user/delete/${user.id}">删除</a>
+                <c:choose>
+                    <c:when test="${zhangfn:status(user) == 0}"><fmt:message key="user.online"/></c:when>
+                    <c:when test="${zhangfn:status(user) == 1}"><fmt:message key="user.offline"/></c:when>
+                    <c:otherwise><fmt:message key="user.disabled"/></c:otherwise>
+                </c:choose>
+            </td>
+            <td>
+                <a class="btn btn-mini" href="${ctx}/admin/user/update/${user.id}">
+                    <fmt:message key="operation.update"/>
+                </a>
+                <a class="btn btn-mini" href="${ctx}/admin/user/delete/${user.id}">
+                    <fmt:message key="operation.delete"/>
+                </a>
             </td>
         </tr>
     </c:forEach>

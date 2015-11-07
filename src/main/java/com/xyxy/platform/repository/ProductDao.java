@@ -5,11 +5,10 @@
  *******************************************************************************/
 package com.xyxy.platform.repository;
 
-import com.xyxy.platform.entity.Product;
-import com.xyxy.platform.entity.User;
+import com.xyxy.platform.entity.Product1;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface ProductDao extends PagingAndSortingRepository<Product, Long>, JpaSpecificationExecutor<Product> {
+public interface ProductDao extends PagingAndSortingRepository<Product1, Long>, JpaSpecificationExecutor<Product1> {
 
 }

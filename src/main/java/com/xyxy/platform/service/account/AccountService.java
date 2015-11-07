@@ -87,7 +87,7 @@ public class AccountService {
 
 	public void updateUser(User user, Long currentUserId) {
 		User currentUser = getUser(currentUserId);
-		user.setRegisterDate(clock.getCurrentDate());
+		user.setUpdateDate(clock.getCurrentDate());
 		user.setLocation(user.getLocation());
 		if (StringUtils.isNotBlank(user.getPlainPassword())) {
 			entryptPassword(user);

@@ -175,7 +175,7 @@ public class User extends IdEntity {
     public enum Status {
         ONLINE("在线"),
         OFFLINE("离线"),
-        DISABLED("禁用");
+        DISABLED("已禁用");
 
         private String text;
 

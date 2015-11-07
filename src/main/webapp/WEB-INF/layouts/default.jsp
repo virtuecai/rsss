@@ -46,9 +46,9 @@
 </head>
 
 <body>
-<div class="container-fluid">
+<div class="container">
     <%@ include file="/WEB-INF/layouts/header.jsp"%>
-    <div class="row-fluid">
+    <div class="row">
         <div class="span3">
             <%@ include file="/WEB-INF/layouts/left.menu.jsp"%>
         </div><!--/span-->

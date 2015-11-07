@@ -8,6 +8,12 @@
 </head>
 
 <body>
+<c:if test="${not empty message}">
+	<div id="message" class="alert alert-success">
+		<button data-dismiss="alert" class="close">×</button>
+		${message}
+	</div>
+</c:if>
 	<form id="inputForm" action="${ctx}/profile" method="post" class="form-horizontal">
 		<input type="hidden" name="id" value="${user.id}"/>
 		<fieldset>
@@ -33,13 +39,13 @@
 			<div class="control-group">
 				<label for="plainPassword" class="control-label">密码:</label>
 				<div class="controls">
-					<input type="password" id="plainPassword" name="plainPassword" class="input-large" placeholder="请输入新密码"/>
+					<input type="password" id="plainPassword" name="plainPassword" class="input-large" placeholder="不填写保持原密码"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="confirmPassword" class="control-label">确认密码:</label>
 				<div class="controls">
-					<input type="password" id="confirmPassword" name="confirmPassword" class="input-large" equalTo="#plainPassword" placeholder="请再次输入新密码"/>
+					<input type="password" id="confirmPassword" name="confirmPassword" class="input-large" equalTo="#plainPassword" placeholder="不填写保持原密码"/>
 				</div>
 			</div>
 			<div class="form-actions">

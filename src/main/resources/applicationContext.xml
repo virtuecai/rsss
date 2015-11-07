@@ -29,6 +29,7 @@
 			<props>
 				<!-- 命名规则 My_NAME->MyName -->
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+				<prop key="hibernate.show_sql">${jpa.show.sql}</prop>
 			</props>
 		</property>
 	</bean>
@@ -54,7 +55,12 @@
 
 	<!-- JSR303 Validator定义 -->
  	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-	
+
+	<bean class="com.xyxy.platform.spring.SpringUtils"/>
+
+	<import resource="classpath:spring-config-cache.xml"/>
+	<import resource="classpath:applicationContext-shiro.xml"/>
+
 	<!-- production环境 -->
  	<beans profile="production">
  		<context:property-placeholder ignore-unresolvable="true"
@@ -137,4 +143,6 @@
 			<jdbc:script location="classpath:data/h2/import-data.sql" encoding="UTF-8"/>
 		</jdbc:initialize-database>
 	</beans>
+
+
 </beans>

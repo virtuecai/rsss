@@ -6,8 +6,7 @@
 package com.xyxy.platform.repository;
 
 import com.google.common.collect.Lists;
-import com.xyxy.platform.entity.Location;
-import com.xyxy.platform.entity.Product;
+import com.xyxy.platform.entity.Product1;
 import com.xyxy.platform.modules.core.persistence.DynamicSpecifications;
 import com.xyxy.platform.modules.core.persistence.SearchFilter;
 import com.xyxy.platform.modules.core.test.spring.SpringTransactionalTestCase;
@@ -28,9 +27,9 @@ public class ProductDaoTest extends SpringTransactionalTestCase {
 // LIKE
 		SearchFilter filter = new SearchFilter("code", SearchFilter.Operator.LIKE, "你");
 		SearchFilter filter2 = new SearchFilter("name", SearchFilter.Operator.LIKE, "她");
-		List<Product> productList = productDao.findAll(DynamicSpecifications.bySearchFilter(Lists.newArrayList(filter, filter2), Product.class));
+		List<Product1> productList = productDao.findAll(DynamicSpecifications.bySearchFilter(Lists.newArrayList(filter, filter2), Product1.class));
 		//com.xyxy.platform.examples.showcase.repository.jpa.DynamicSpecificationTest
-		for(Product p : productList) {
+		for(Product1 p : productList) {
 			System.out.println(p.toString());
 		}
 	}

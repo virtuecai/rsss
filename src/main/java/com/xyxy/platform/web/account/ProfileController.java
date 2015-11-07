@@ -5,9 +5,11 @@
  *******************************************************************************/
 package com.xyxy.platform.web.account;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.xyxy.platform.service.account.ShiroDbRealm;
+import com.xyxy.platform.web.utils.I18nMessageUtil;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import com.xyxy.platform.entity.User;
 import com.xyxy.platform.service.account.AccountService;
 import com.xyxy.platform.service.account.ShiroDbRealm.ShiroUser;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * 用户修改自己资料的Controller.
@@ -37,11 +40,13 @@ public class ProfileController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("user") User user) {
+	public String update(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		ShiroDbRealm.ShiroUser shiroUser = (ShiroDbRealm.ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		accountService.updateUser(user, shiroUser.id);
-		updateCurrentUserName(user.getName());
-		return "redirect:/";
+		updateCurrentUserName(user.getLoginName());
+		String msg = I18nMessageUtil.get(request, "profile.update.success", user.getLoginName());
+		redirectAttributes.addFlashAttribute("message", msg);
+		return "redirect:/profile";
 	}
 
 	/**
@@ -88,5 +93,6 @@ public class ProfileController {
 	private void updateCurrentUserName(String userName) {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		user.name = userName;
+		user.loginName = userName;
 	}
 }
