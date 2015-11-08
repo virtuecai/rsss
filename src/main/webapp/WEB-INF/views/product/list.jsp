@@ -74,7 +74,7 @@
 </table>
 
 <div class="clearfix">
-    <button class="btn btn pull-left"><fmt:message key="export.excel"/></button>
+    <a class="btn btn pull-left" target="_blank" href="${ctx}/product/export"><fmt:message key="export.excel"/></a>
     <button class="btn btn-primary pull-right products-save">
         <fmt:message key="save"/>
     </button>
