@@ -1,54 +1,43 @@
-/*******************************************************************************
- * Copyright (c) 2005, 2014
- * <p/>
- * Licensed under the Apache License, Version 2.0 (the "License");
- *******************************************************************************/
 package com.xyxy.platform.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.collect.ImmutableList;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "t_product1")
-public class Product1 extends IdEntity {
+public class Product1 extends IdEntity implements Serializable {
 
-    private String code;//商品代码, 有点意思就行
+    /*private String code;//商品代码, 有点意思就行, 英文数字*/
     private String name;//商品名称 日文
     private Date createDate;//创建时间
     private Date updateDate;//更新时间
     private Long createUserId;//创建用户
     private Long updateUserId;//更新用户
+    private Product2 product2; //商品代码字段jan_cd, 有点意思就行, 英文数字*/
 
-    @Column(name = "jan_cd")
-    public String getCode() {
-        return code;
-    }
-
-    @Column(name = "jan_name")
+    @Column(name = "jan_name", length = 40)
     public String getName() {
         return name;
     }
 
     @Column(name = "cre_date")
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+08:00")
     public Date getCreateDate() {
         return createDate;
     }
 
     @Column(name = "upd_date")
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+08:00")
     public Date getUpdateDate() {
         return updateDate;
     }
 
     @Column(name = "cre_user_id")
-    public Long getCreateUser() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
@@ -57,8 +46,10 @@ public class Product1 extends IdEntity {
         return updateUserId;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="jan_cd", referencedColumnName="jan_cd")
+    public Product2 getProduct2() {
+        return product2;
     }
 
     public void setName(String name) {
@@ -79,6 +70,10 @@ public class Product1 extends IdEntity {
 
     public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
+    }
+
+    public void setProduct2(Product2 product2) {
+        this.product2 = product2;
     }
 
     @Override

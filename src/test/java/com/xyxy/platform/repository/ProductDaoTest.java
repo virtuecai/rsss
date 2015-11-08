@@ -6,6 +6,7 @@
 package com.xyxy.platform.repository;
 
 import com.google.common.collect.Lists;
+import com.xyxy.platform.entity.Product;
 import com.xyxy.platform.entity.Product1;
 import com.xyxy.platform.modules.core.persistence.DynamicSpecifications;
 import com.xyxy.platform.modules.core.persistence.SearchFilter;
@@ -20,13 +21,29 @@ import java.util.List;
 public class ProductDaoTest extends SpringTransactionalTestCase {
 
 	@Autowired
-	private ProductDao productDao;
+	private Product1Dao productDao;
 
 	@Test
-	public void test() throws Exception {
-// LIKE
-		SearchFilter filter = new SearchFilter("code", SearchFilter.Operator.LIKE, "你");
-		SearchFilter filter2 = new SearchFilter("name", SearchFilter.Operator.LIKE, "她");
+	public void findAll() throws Exception {
+		Iterable<Product1> all = productDao.findAll();
+		for(Product1 p: all) {
+			System.out.println(p);
+		}
+	}
+
+	@Test
+	public void findAllByNoParams() throws Exception {
+		List<Product1> all = productDao.findAllByNoParams();
+		for(Product1 p: all) {
+			System.out.println(p);
+		}
+	}
+
+	@Test
+	public void findByCondicions() throws Exception {
+		// LIKE
+		SearchFilter filter = new SearchFilter("name", SearchFilter.Operator.LIKE, "日文名称");
+		SearchFilter filter2 = new SearchFilter("product2.name", SearchFilter.Operator.LIKE, "中文名");
 		List<Product1> productList = productDao.findAll(DynamicSpecifications.bySearchFilter(Lists.newArrayList(filter, filter2), Product1.class));
 		//com.xyxy.platform.examples.showcase.repository.jpa.DynamicSpecificationTest
 		for(Product1 p : productList) {

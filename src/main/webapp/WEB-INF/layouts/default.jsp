@@ -24,6 +24,7 @@
     <script src="${ctx}/static/js/lib/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="${ctx}/static/js/lib/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
     <script src="${ctx}/static/js/lib/jquery-validation/1.11.1/messages_bs_zh.js" type="text/javascript"></script>
+    <script src="${ctx}/static/js/lib/bootstrap-notify.js" type="text/javascript"></script>
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -60,6 +61,7 @@
 </div>
 <script src="${ctx}/static/js/lib/bootstrap/2.3.2/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
+    window['ctx'] = '${ctx}';
     $(function () {
         //菜单定位
         var menuPosition = $('input[name=menu-position]').val();

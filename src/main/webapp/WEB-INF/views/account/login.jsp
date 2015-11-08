@@ -96,6 +96,7 @@
 <script src="${ctx}/static/js/lib/bootstrap/2.3.2/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function() {
+		$('#username').focus();
 		$("#loginForm").validate();
 	});
 </script>

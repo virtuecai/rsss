@@ -1,19 +1,21 @@
-
 package com.xyxy.platform.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "t_product2")
-public class Product2 extends IdEntity {
+public class Product2 extends IdEntity implements Serializable {
 
     private String code;//商品代码, 有点意思就行
     private String name;//商品名称 中文
-    private Integer grossWeight;//毛重 单位 g
-    private Integer netWeight;//净重 单位 g
+    private Double grossWeight;//毛重 单位 g
+    private Double netWeight;//净重 单位 g
     private Date createDate;//创建时间
     private Date updateDate;//更新时间
     private Long createUserId;//创建用户
@@ -30,12 +32,12 @@ public class Product2 extends IdEntity {
     }
 
     @Column(name = "gross_weight")
-    public Integer getGrossWeight() {
+    public Double getGrossWeight() {
         return grossWeight;
     }
 
     @Column(name = "net_weight")
-    public Integer getNetWeight() {
+    public Double getNetWeight() {
         return netWeight;
     }
 
@@ -50,7 +52,7 @@ public class Product2 extends IdEntity {
     }
 
     @Column(name = "cre_user_id")
-    public Long getCreateUser() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
@@ -67,11 +69,11 @@ public class Product2 extends IdEntity {
         this.name = name;
     }
 
-    public void setGrossWeight(Integer grossWeight) {
+    public void setGrossWeight(Double grossWeight) {
         this.grossWeight = grossWeight;
     }
 
-    public void setNetWeight(Integer netWeight) {
+    public void setNetWeight(Double netWeight) {
         this.netWeight = netWeight;
     }
 

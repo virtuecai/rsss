@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = "/login")
 public class LoginController {
 
-	private AccountService accountService;
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String login() {
 		return "account/login";

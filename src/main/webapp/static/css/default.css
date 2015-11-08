@@ -101,3 +101,15 @@
     top: auto;
     bottom: 270px;
 }
+#productListTable td {
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+.text-abbreviation{
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
