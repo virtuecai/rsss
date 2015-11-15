@@ -16,6 +16,9 @@
     <li data-menu_position="product" class="active">
         <a href="${ctx}/product"><i class="icon-chevron-right"></i> 商品管理</a>
     </li>
+    <li data-menu_position="shukka" class="active">
+        <a href="${ctx}/shukka"><i class="icon-chevron-right"></i> 出库情报</a>
+    </li>
     <li data-menu_position="task" class="active">
         <a href="${ctx}/task"><i class="icon-chevron-right"></i> 任务管理</a>
     </li>

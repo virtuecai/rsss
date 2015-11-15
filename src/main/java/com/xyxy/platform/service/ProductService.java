@@ -26,7 +26,7 @@ public class ProductService {
     private Clock clock = Clock.DEFAULT;
 
     private Product1Dao product1Dao;
-    private Product1Dao product2Dao;
+    private Product2Dao product2Dao;
 
 
     @Autowired
@@ -35,7 +35,7 @@ public class ProductService {
     }
 
     @Autowired
-    public void setProduct2Dao(Product1Dao product2Dao) {
+    public void setProduct2Dao(Product2Dao product2Dao) {
         this.product2Dao = product2Dao;
     }
 
@@ -75,6 +75,18 @@ public class ProductService {
         }
         List<Product1> productList = product1Dao.findAll(DynamicSpecifications.bySearchFilter(searchFilters, Product1.class));
         return productList;
+    }
+
+    /**
+     * 根据商品代码查找商品2数据, code 设有唯一索引
+     * @param code
+     * @return
+     */
+    public Product2 findProduct2ByCode(String code) {
+        return product2Dao.findByCode(code);
+    }
+    public Product1 findProduct1ByCode(String code) {
+        return product1Dao.findByProduct2Code(code);
     }
 
     public void save(List<Product1> product1List, Long userId) {

@@ -9,6 +9,10 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/11/7 0007.
@@ -45,4 +49,75 @@ public class SimpleExportToExcel {
         }
     }
 
+    public static void main(String[] args) {
+        Map<User,List<User2>> map = new LinkedHashMap();
+        User user = new User(1l, "user 1l");
+        List<User2> user2List = new ArrayList<>();
+        user2List.add(new User2(1l,"user2 1l"));
+        user2List.add(new User2(2l,"user2 2l"));
+        map.put(user, user2List);
+
+        user = new User(2l, "user 2l");
+        user2List = new ArrayList<>();
+        user2List.add(new User2(3l,"user2 3l"));
+        user2List.add(new User2(4l, "user2 4l"));
+        map.put(user, user2List);
+
+        System.out.println(map);
+    }
+
+
+
+}
+
+class User {
+    private Long id;
+    private String name;
+
+    public User(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+class User2 {
+    private Long id;
+    private String name;
+
+    public User2(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

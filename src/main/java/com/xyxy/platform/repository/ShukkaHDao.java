@@ -1,14 +1,13 @@
 package com.xyxy.platform.repository;
 
-import com.xyxy.platform.entity.Product1;
-import com.xyxy.platform.entity.Product2;
+import com.xyxy.platform.entity.ShukkaH;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface Product2Dao extends PagingAndSortingRepository<Product2, Long>, JpaSpecificationExecutor<Product2> {
+public interface ShukkaHDao extends PagingAndSortingRepository<ShukkaH, Long>, JpaSpecificationExecutor<ShukkaH> {
 
-    Product2 findByCode(String code);
+	
 }

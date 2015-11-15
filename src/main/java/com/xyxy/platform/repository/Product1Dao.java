@@ -1,6 +1,7 @@
 package com.xyxy.platform.repository;
 
 import com.xyxy.platform.entity.Product1;
+import com.xyxy.platform.entity.Product2;
 import com.xyxy.platform.entity.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,4 +17,6 @@ public interface Product1Dao extends PagingAndSortingRepository<Product1, Long>,
 	@Query("select p from Product1 p where p.product2.updateDate < p.updateDate")
 	List<Product1> findAllByNoParams();
 
+
+	Product1 findByProduct2Code(String code);
 }
