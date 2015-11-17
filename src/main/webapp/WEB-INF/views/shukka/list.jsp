@@ -30,7 +30,7 @@
 </c:if>
 
 <div class="clearfix">
-    <form id="importDataForm" class="form-inline" action="${ctx}/shukka/import" method="post"
+    <form id="importDataForm" class="form-inline" action="${ctx}/shukka/loadHeadData" method="post"
           enctype="multipart/form-data">
         <span class="btn btn-success fileinput-button">
             <span>选择数据导入文件</span>

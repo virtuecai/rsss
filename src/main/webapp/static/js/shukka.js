@@ -16,7 +16,18 @@ $(function () {
         var shukkaHList = [];
 
         var validate = true;
-        //数据验证
+        //填写信息是否为空验证
+        $table.find('div.can-edit').each(function () {
+            var $this = $(this);
+            var value = $.trim($this.text());
+            if(!value || value == "") {
+                validate = false;
+                YTMsg.warn("不得为空!");
+                $this.focus();
+                return false;
+            }
+        });
+        //填写信息数字number验证
         $('div[name=saleCd]').each(function () {
            var $this = $(this);
             var val = $.trim($this.text()) ;
@@ -41,9 +52,9 @@ $(function () {
                 saleCd: saleCd ? saleCd : null
             });
         });
-        console.log(shukkaHList);
+        //console.log(shukkaHList);
         $.ajax({
-            url: window['ctx'] + '/shukka/update',
+            url: window['ctx'] + '/shukka/save',
             contentType: "application/json",
             type: 'post',
             dataType: 'json',
