@@ -26,6 +26,7 @@ public class ShukkaD extends IdEntity implements Serializable {
     private Date updDate; //更新时间
     private Long creUserId; //创建用户id
     private Long updUserId; //更新用户id
+    private String customerId; //得意先id
 
     private Long shukkaHId; //主表关联字段
 
@@ -94,6 +95,10 @@ public class ShukkaD extends IdEntity implements Serializable {
 
     public Long getUpdUserId() {
         return updUserId;
+    }
+
+    public String getCustomerId() {
+        return customerId;
     }
 
     @Column(name = "shukka_h_id")
@@ -167,5 +172,9 @@ public class ShukkaD extends IdEntity implements Serializable {
 
     public void setShukkaHId(Long shukkaHId) {
         this.shukkaHId = shukkaHId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 }

@@ -250,6 +250,7 @@ public class ShukkaController {
                         shukkaD.setUpdDate(date);
                         shukkaD.setCreUserId(user.id);
                         shukkaD.setUpdUserId(user.id);
+                        shukkaD.setCustomerId(shukkaH.getCustomerId());
                         //form表单中填写的数据
                         shukkaD.setContenerId(shukkaHForm.getContenerId());
                         shukkaDList.add(shukkaD);
